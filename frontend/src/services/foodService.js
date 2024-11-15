@@ -1,18 +1,27 @@
-import { menu_foods, menu_foods_tags } from "../data";
+import axios from "axios";
 
-export const getAll = async () => menu_foods
+export const getAll = async () => {
+    const { data } = await axios.get('/api/foods');
+    return data;
+};
 
-export const search = async searchTerm =>
-    menu_foods.filter(item =>
-        item.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+export const search = async searchTerm => {
+    const { data } = await axios.get('/api/foods/search/' + searchTerm);
+    return data;
+};
 
-export const getAllTags = async () => menu_foods_tags;
+export const getAllTags = async () => {
+    const { data } = await axios.get('/api/foods/tags');
+    return data;
+};
 
 export const getAllByTags = async tag => {
     if (tag === 'All') return getAll();
-    return menu_foods.filter(item => item.tags?.includes(tag));
-}
+    const { data } = await axios.get('/api/foods/tag/' + tag);
+    return data;
+};
 
-export const getById = async foodId =>
-    menu_foods.find(item => item.id === foodId);
+export const getById = async foodId => {
+    const { data } = await axios.get('/api/foods/' + foodId);
+    return data;
+};
