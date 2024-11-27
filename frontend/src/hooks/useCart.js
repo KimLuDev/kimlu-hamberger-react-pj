@@ -1,9 +1,9 @@
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 const CartContext = createContext(null);
 const CART_KEY = 'cart';
 const EMPTY_CART = {
-    item: [],
+    items: [],
     totalPrice: 0,
     totalCount: 0,
 };
@@ -20,11 +20,14 @@ export default function CartProvider({ children }) {
         setTotalPrice(totalPrice);
         setTotalCount(totalCount);
 
-        localStorage.setItem(CART_KEY, JSON.stringify({
-            items: cartItems,
-            totalPrice,
-            totalCount,
-        }));
+        localStorage.setItem(
+            CART_KEY,
+            JSON.stringify({
+                items: cartItems,
+                totalPrice,
+                totalCount,
+            })
+        );
     }, [cartItems]);
 
     function getCartFromLocalStorage() {
@@ -41,13 +44,13 @@ export default function CartProvider({ children }) {
         setCartItems(filteredCartItems);
     };
 
-    const changeQuantity = (cartItem, newQuantity) => {
+    const changeQuantity = (cartItem, newQauntity) => {
         const { food } = cartItem;
 
         const changedCartItem = {
             ...cartItem,
-            quantity: newQuantity,
-            price: food.price * newQuantity
+            quantity: newQauntity,
+            price: food.price * newQauntity,
         };
 
         setCartItems(
@@ -64,12 +67,27 @@ export default function CartProvider({ children }) {
         }
     };
 
-    return <CartContext.Provider
-        value={{ cart: { items: cartItems, totalPrice, totalCount }, removeFromCart, changeQuantity, addToCart }}
-    >
-        {children}
-    </CartContext.Provider>
-}
+    const clearCart = () => {
+        localStorage.removeItem(CART_KEY);
+        const { items, totalPrice, totalCount } = EMPTY_CART;
+        setCartItems(items);
+        setTotalPrice(totalPrice);
+        setTotalCount(totalCount);
+    };
 
+    return (
+        <CartContext.Provider
+            value={{
+                cart: { items: cartItems, totalPrice, totalCount },
+                removeFromCart,
+                changeQuantity,
+                addToCart,
+                clearCart,
+            }}
+        >
+            {children}
+        </CartContext.Provider>
+    );
+}
 
 export const useCart = () => useContext(CartContext);

@@ -75,3 +75,22 @@ export const menu_foods_tags = [
     { name: 'Popular', count: 1 },
     { name: 'Fry', count: 1 },
 ];
+
+export const sample_users = [
+    {
+        id: 1,
+        name: 'Tuan Tu',
+        email: 'tu@gmail.com',
+        password: '12345',
+        address: 'Binh Chanh',
+        isAdmin: false,
+    },
+    {
+        id: 2,
+        name: 'Tuan Kiet',
+        email: 'kiet@gmail.com',
+        password: '123',
+        address: 'Thu Duc',
+        isAdmin: true,
+    },
+];
