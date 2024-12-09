@@ -8,11 +8,7 @@ Search.defaultProps = {
   placeholder: 'Search KIMLU Hamberger!',
 };
 
-export default function Search({
-  searchRoute,
-  defaultRoute,
-  margin,
-  placeholder, }) {
+export default function Search({ searchRoute, defaultRoute, margin, placeholder, }) {
   const [term, setTerm] = useState('');
   const navigate = useNavigate();
   const { searchTerm } = useParams();
