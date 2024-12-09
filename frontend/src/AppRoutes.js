@@ -7,6 +7,10 @@ import LoginPage from './pages/Login/LoginPage';
 import RegisterPage from './pages/Register/RegisterPage';
 import CheckoutPage from './pages/Checkout/CheckoutPage';
 import AuthRoute from './components/AuthRoute/AuthRoute';
+import PaymentPage from './pages/Payment/PaymentPage';
+import OrderTrackPage from './pages/OrderTrack/OrderTrackPage';
+import ProfilePage from './pages/Profile/ProfilePage';
+import OrdersPage from './pages/Orders/OrdersPage';
 export default function AppRoutes() {
   return (
     <Routes>
@@ -21,7 +25,22 @@ export default function AppRoutes() {
         <AuthRoute>
           <CheckoutPage />
         </AuthRoute>} />
-
+      <Route path="/payment" element={
+        <AuthRoute>
+          <PaymentPage />
+        </AuthRoute>} />
+      <Route path="/track/:orderId" element={
+        <AuthRoute>
+          <OrderTrackPage />
+        </AuthRoute>} />
+      <Route path="/profile" element={
+        <AuthRoute>
+          <ProfilePage />
+        </AuthRoute>} />
+      <Route path="/orders/:filter?" element={
+        <OrdersPage>
+          <ProfilePage />
+        </OrdersPage>} />
     </Routes>
   );
 }

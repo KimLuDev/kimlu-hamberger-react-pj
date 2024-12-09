@@ -89,7 +89,7 @@ function FindButtonAndMarker({ readonly, location, onChange }) {
           }}
           position={position}
           draggable={!readonly}
-        // icon={markerIcon}
+          icon={markerIcon}
         >
           <Popup>Shipping Location</Popup>
         </Marker>
